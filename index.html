@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Flo & Scie | Objets en Bois Personnalisés - Île-de-France</title>
-    <meta name="description" content="Atelier Flo & Scie : artisanat français en Île-de-France. Découvrez nos veilleuses LED, tirelires et décorations personnalisées en bois faites main.">
+    <title>Atelier Flo & Scie | Galerie de Créations Artisanales en Bois</title>
+    <meta name="description" content="Découvrez la galerie de l'Atelier Flo & Scie : veilleuses, tirelires et décoration personnalisée. Artisanat d'art en Île-de-France.">
     
     <style>
-        :root { --primary: #5d4037; --accent: #f4a261; --light: #fafafa; }
-        body { font-family: sans-serif; margin: 0; background: var(--light); color: #333; line-height: 1.6; }
+        :root { --primary: #5d4037; --accent: #f4a261; --light: #fafafa; --dark: #3e2723; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: #333; line-height: 1.6; scroll-behavior: smooth; }
         
-        /* Bannière principale avec votre illustration d'atelier */
+        /* Bannière Hero */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2026-05-18-15-03-56-527_com.google.android.googlequicksearchbox.jpg');
             background-size: cover; background-position: center; height: 450px;
@@ -18,75 +18,101 @@
             color: white; text-align: center;
         }
         
-        nav { background: #3e2723; padding: 1rem; text-align: center; position: sticky; top: 0; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav { background: var(--dark); padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
+        nav a:hover { color: var(--accent); }
+
         .container { max-width: 1200px; margin: auto; padding: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 300px; object-fit: cover; }
-        .card-content { padding: 1rem; }
-        .btn { background: var(--accent); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
-        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+        h2 { border-bottom: 3px solid var(--accent); padding-bottom: 0.5rem; color: var(--primary); display: inline-block; margin-top: 3rem; }
+        
+        /* Galerie Grid */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 1.5rem; }
+        .gallery-item { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .gallery-item p { padding: 10px; margin: 0; text-align: center; font-weight: bold; font-size: 0.9rem; background: white; }
+
+        .contact-box { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-top: 4rem; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn { background: var(--accent); color: white; padding: 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
+        
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#accueil">L'Atelier</a>
-    <a href="#creations">Nos Créations</a>
+    <a href="#accueil">Accueil</a>
+    <a href="#galerie">Galerie</a>
     <a href="#contact">Contact</a>
 </nav>
 
 <header class="hero" id="accueil">
     <h1>Atelier Flo & Scie</h1>
-    <p>Artisanat Passionné & Objets Uniques en Bois</p>
+    <p>Le bois sublimé par la personnalisation en Île-de-France</p>
 </header>
 
 <div class="container">
-    <section id="creations">
-        <h2>Nos Créations Françaises</h2>
-        <div class="grid">
-            <!-- Veilleuse Panda -->
-            <div class="card">
-                <img src="IMG-20260426-WA0070.jpg" alt="Veilleuse Panda LED en bois">
-                <div class="card-content">
-                    <h3>Veilleuse Panda</h3>
-                    <p>Une lumière douce pour accompagner les nuits de vos enfants.</p>
-                </div>
-            </div>
-            <!-- Arbre Généalogique -->
-            <div class="card">
-                <img src="IMG-20260426-WA0035.jpg" alt="Arbre généalogique en bois personnalisé">
-                <div class="card-content">
-                    <h3>Arbre de Vie</h3>
-                    <p>Personnalisez chaque branche avec les prénoms de votre famille.</p>
-                </div>
-            </div>
-            <!-- Tirelire Koala -->
-            <div class="card">
-                <img src="IMG-20260426-WA0034.jpg" alt="Tirelire koala bois personnalisée">
-                <div class="card-content">
-                    <h3>Tirelire Koala</h3>
-                    <p>Un objet ludique et artisanal pour apprendre à épargner.</p>
-                </div>
-            </div>
+    <section id="galerie">
+        <center><h2>Galerie de nos Créations</h2></center>
+
+        <h3>✨ Veilleuses & Lampes Enchantées</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="IMG-20260426-WA0015.jpg" alt="Veilleuse Pingouin rouge"><p>Pingouin Festif</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0017.jpg" alt="Veilleuse Tortue"><p>Tortue Multicolore</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0021.jpg" alt="Veilleuse Chouette"><p>Chouette Douceur</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0049.jpg" alt="Veilleuse Lune"><p>Lune Étoilée</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0051.jpg" alt="Veilleuse Renard"><p>Petit Renard Roux</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0052.jpg" alt="Veilleuse Koala"><p>Koala Câlin</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0064.jpg" alt="Veilleuse Dragon"><p>Petit Dragon Vert</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0068.jpg" alt="Veilleuse Éléphant"><p>Éléphant sous la Lune</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0070.jpg" alt="Veilleuse Panda"><p>Panda et son Bambou</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0031.jpg" alt="Veilleuse Étoile"><p>Étoile Magique</p></div>
+        </div>
+
+        <h3>💰 Tirelires Artisanales</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="IMG-20260426-WA0026.jpg" alt="Tirelire Lion"><p>Le Roi Lion</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0030.jpg" alt="Tirelire Renard"><p>Renard Rusé</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0034.jpg" alt="Tirelire Koala"><p>Koala Épargne</p></div>
+        </div>
+
+        <h3>🎨 Décoration & Souvenirs</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="IMG-20260426-WA0035.jpg" alt="Arbre généalogique"><p>Arbre de Vie Familial</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0045.jpg" alt="Cœur Infini"><p>Cœur Infini Personnalisé</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0067.jpg" alt="Cœur Lumineux"><p>Cœur "À la Vie, à la Mort"</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0024.jpg" alt="Prénom Graffiti Thomas"><p>Prénoms Style Graffiti</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0071.jpg" alt="Étoile filante Thea"><p>Prénoms sur Étoile</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0018.jpg" alt="Van bois"><p>Van Rétro Déco</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0039.jpg" alt="Game Over Lumineux"><p>Signe Game Over</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0029.jpg" alt="Sapins Noël"><p>Sapins de Noël Stylisés</p></div>
+        </div>
+
+        <h3>🏆 Supports & Accessoires</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="IMG-20260426-WA0065.jpg" alt="Support Fusée"><p>Support Téléphone Fusée</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0025.jpg" alt="Supports animaux"><p>Loup et Clé de Sol</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0027.jpg" alt="Supports Cerf"><p>Cerf et Chat Tablettes</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0038.jpg" alt="Porte-médailles"><p>Porte-médailles Victoire</p></div>
+            <div class="gallery-item"><img src="IMG-20260426-WA0040.jpg" alt="Porte-médailles Cœurs"><p>Porte-médailles Cœurs</p></div>
         </div>
     </section>
 
-    <section id="contact" style="margin-top: 4rem;">
-        <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-            <h2>Faire une demande de création</h2>
-            <form action="mailto:nperiot@yahoo.fr" method="post" enctype="text-plain">
-                <input type="text" name="nom" placeholder="Votre Nom" style="width:100%; padding:10px; margin-bottom:10px;" required>
-                <textarea name="message" rows="4" placeholder="Détails de votre projet (Prénom, modèle...)" style="width:100%; padding:10px; margin-bottom:10px;" required></textarea>
-                <button type="submit" class="btn">Envoyer mon projet à l'Atelier</button>
-            </form>
-        </div>
+    <section id="contact" class="contact-box">
+        <h2>Demander une création personnalisée</h2>
+        <p>Inspiré par un de ces modèles ? Contactez-nous pour personnaliser le vôtre (prénom, couleurs, taille).</p>
+        <form action="mailto:votre-email@exemple.com" method="post" enctype="text-plain">
+            <input type="text" name="nom" placeholder="Votre Nom" required>
+            <input type="email" name="email" placeholder="Votre Email" required>
+            <textarea name="message" rows="5" placeholder="Quel objet souhaitez-vous personnaliser ?" required></textarea>
+            <button type="submit" class="btn">Envoyer ma demande à l'Atelier</button>
+        </form>
     </section>
 </div>
 
 <footer>
-    <p>&copy; 2024 Atelier Flo & Scie - Fabrication Artisanale en Île-de-France</p>
+    <p>&copy; 2024 Atelier Flo & Scie - Créations Artisanales en Île-de-France - Fabrication Française</p>
 </footer>
 
 </body>
