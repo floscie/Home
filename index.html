@@ -1,105 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Atelier du Bois - Créations Artisanales en Île-de-France</title>
+    <title>Atelier Flo & Scie | Objets en Bois Personnalisés - Île-de-France</title>
+    <meta name="description" content="Atelier Flo & Scie : artisanat français en Île-de-France. Découvrez nos veilleuses LED, tirelires et décorations personnalisées en bois faites main.">
+    
     <style>
-        :root {
-            --primary: #5d4037;
-            --secondary: #d7ccc8;
-            --accent: #f4a261;
-            --text: #333;
-            --light: #fafafa;
+        :root { --primary: #5d4037; --accent: #f4a261; --light: #fafafa; }
+        body { font-family: sans-serif; margin: 0; background: var(--light); color: #333; line-height: 1.6; }
+        
+        /* Bannière principale avec votre illustration d'atelier */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2026-05-18-15-03-56-527_com.google.android.googlequicksearchbox.jpg');
+            background-size: cover; background-position: center; height: 450px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); margin: 0; background-color: var(--light); }
-        header { background: var(--primary); color: white; padding: 2rem 1rem; text-align: center; }
-        nav { background: #3e2723; padding: 0.5rem; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        
+        nav { background: #3e2723; padding: 1rem; text-align: center; position: sticky; top: 0; }
         nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { max-width: 1100px; margin: auto; padding: 2rem; }
-        .hero { text-align: center; padding: 3rem 0; background: var(--secondary); border-radius: 8px; margin-bottom: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 300px; object-fit: cover; }
         .card-content { padding: 1rem; }
-        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; color: var(--primary); }
-        .contact-form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { background: var(--accent); color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1rem; }
-        footer { background: var(--primary); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+        .btn { background: var(--accent); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>L'Atelier du Bois Personnalisé</h1>
-    <p>Artisanat Français & Créations Uniques en Île-de-France</p>
-</header>
-
 <nav>
-    <a href="#accueil">Accueil</a>
+    <a href="#accueil">L'Atelier</a>
     <a href="#creations">Nos Créations</a>
     <a href="#contact">Contact</a>
 </nav>
 
-<div class="container" id="accueil">
-    <div class="hero">
-        <h2>Le bois prend vie sous vos yeux</h2>
-        <p>Découvrez nos objets de décoration personnalisés, entièrement fabriqués à la main en France. Chaque pièce est unique et conçue pour durer.</p>
-    </div>
+<header class="hero" id="accueil">
+    <h1>Atelier Flo & Scie</h1>
+    <p>Artisanat Passionné & Objets Uniques en Bois</p>
+</header>
 
+<div class="container">
     <section id="creations">
-        <h2>Nos Catégories de Produits</h2>
-        
-        <h3>Veilleuses et Lampes LED</h3>
-        <p>Illuminez vos soirées avec nos veilleuses douces. Disponibles en formes variées : 
-            Pingouins [1, 2], Tortues multicolores [3], Hiboux [4, 5], Lunes [6], Renards [7], Koalas [8], Dragons [9], Éléphants [10] ou Pandas [11].</p>
+        <h2>Nos Créations Françaises</h2>
         <div class="grid">
-            <div class="card"><img src="IMG-20260426-WA0015.jpg" alt="Veilleuse Pingouin"></div>
-            <div class="card"><img src="IMG-20260426-WA0051.jpg" alt="Veilleuse Renard"></div>
-            <div class="card"><img src="IMG-20260426-WA0070.jpg" alt="Veilleuse Panda"></div>
+            <!-- Veilleuse Panda -->
+            <div class="card">
+                <img src="IMG-20260426-WA0070.jpg" alt="Veilleuse Panda LED en bois">
+                <div class="card-content">
+                    <h3>Veilleuse Panda</h3>
+                    <p>Une lumière douce pour accompagner les nuits de vos enfants.</p>
+                </div>
+            </div>
+            <!-- Arbre Généalogique -->
+            <div class="card">
+                <img src="IMG-20260426-WA0035.jpg" alt="Arbre généalogique en bois personnalisé">
+                <div class="card-content">
+                    <h3>Arbre de Vie</h3>
+                    <p>Personnalisez chaque branche avec les prénoms de votre famille.</p>
+                </div>
+            </div>
+            <!-- Tirelire Koala -->
+            <div class="card">
+                <img src="IMG-20260426-WA0034.jpg" alt="Tirelire koala bois personnalisée">
+                <div class="card-content">
+                    <h3>Tirelire Koala</h3>
+                    <p>Un objet ludique et artisanal pour apprendre à épargner.</p>
+                </div>
+            </div>
         </div>
-
-        <h3>Tirelires Artisanales</h3>
-        <p>Épargnez avec style grâce à nos tirelires à façade transparente : Lion [12], Renard [13] ou Koala [14].</p>
-        <div class="grid">
-            <div class="card"><img src="IMG-20260426-WA0026.jpg" alt="Tirelire Lion"></div>
-            <div class="card"><img src="IMG-20260426-WA0034.jpg" alt="Tirelire Koala"></div>
-        </div>
-
-        <h3>Décoration & Personnalisation</h3>
-        <p>Célébrez vos moments forts : Arbres de vie familiaux [15], prénoms graffiti personnalisés (ex: "Thomas") [16], cœurs infinis gravés [17], et décors muraux lumineux "Game Over" [18].</p>
-        <div class="grid">
-            <div class="card"><img src="IMG-20260426-WA0035.jpg" alt="Arbre de vie"></div>
-            <div class="card"><img src="IMG-20260426-WA0045.jpg" alt="Cœur Infini"></div>
-            <div class="card"><img src="IMG-20260426-WA0024.jpg" alt="Prénom Graffiti"></div>
-        </div>
-
-        <h3>Supports Utiles & Porte-Médailles</h3>
-        <p>Optimisez votre espace avec nos supports pour téléphones (Fusées [19], Loup [20], Cerf [21]) ou nos présentoirs à médailles thématiques [22-24].</p>
     </section>
 
-    <section id="contact" style="margin-top: 3rem;">
-        <h2>Faire une demande de personnalisation</h2>
-        <div class="contact-form">
-            <p>Un projet particulier ? Une envie de cadeau unique ? Contactez-nous pour un devis gratuit.</p>
-            <form action="mailto:votre-email@exemple.com" method="post" enctype="text-plain">
-                <input type="text" name="nom" placeholder="Votre Nom" required>
-                <input type="email" name="email" placeholder="Votre Email" required>
-                <input type="text" name="objet" placeholder="Type d'objet souhaité (ex: Veilleuse Koala)">
-                <textarea name="message" rows="5" placeholder="Détails de votre personnalisation (Prénom, couleurs, date...)" required></textarea>
-                <button type="submit">Envoyer ma demande</button>
+    <section id="contact" style="margin-top: 4rem;">
+        <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <h2>Faire une demande de création</h2>
+            <form action="mailto:nperiot@yahoo.fr" method="post" enctype="text-plain">
+                <input type="text" name="nom" placeholder="Votre Nom" style="width:100%; padding:10px; margin-bottom:10px;" required>
+                <textarea name="message" rows="4" placeholder="Détails de votre projet (Prénom, modèle...)" style="width:100%; padding:10px; margin-bottom:10px;" required></textarea>
+                <button type="submit" class="btn">Envoyer mon projet à l'Atelier</button>
             </form>
         </div>
     </section>
 </div>
 
 <footer>
-    <p>&copy; 2024 L'Atelier du Bois - Fabrication Française en Île-de-France</p>
+    <p>&copy; 2024 Atelier Flo & Scie - Fabrication Artisanale en Île-de-France</p>
 </footer>
 
 </body>
 </html>
-
