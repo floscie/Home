@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Bali — Itinéraire · 26 Juil → 11 Août 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --paper:#f4efe4; --gold:#d8a24a; --ease:cubic-bezier(.16,.84,.32,1); }
+  *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{height:100%; overscroll-behavior:none}
+  body{background:#070806; color:var(--paper); font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;}
+
+  /* ---- FRAME : 16/9 par défaut (bureau), 9/16 en portrait (mobile) ---- */
+  .frame{position:relative; width:100%; max-width:1180px; aspect-ratio:16/9;
+    border-radius:18px; overflow:hidden; box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+    background:#0a0c08; touch-action:pan-y;}
+  @media (max-aspect-ratio:1/1){
+    .frame{max-width:480px; width:100%; height:100%; aspect-ratio:9/16; max-height:100vh; border-radius:0;}
+  }
+  @media (max-aspect-ratio:16/9) and (min-aspect-ratio:1/1){ .frame{height:auto} }
+
+  .stage{position:absolute; inset:0}
+  .slide{position:absolute; inset:0; opacity:0; visibility:hidden;
+    transition:opacity .8s var(--ease), visibility .8s; display:flex; flex-direction:column; justify-content:flex-end;}
+  .slide.active{opacity:1; visibility:visible}
+
+  .scene{position:absolute; inset:0; overflow:hidden}
+  .scene .bg{position:absolute; inset:-4%}
+  .scene .photo{position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; z-index:1}
+  .slide.active .scene .bg,.slide.active .scene .photo{animation:kb 9.2s ease-out forwards}
+  @keyframes kb{from{transform:scale(1.03)}to{transform:scale(1.15) translate(-1.8%,-1.3%)}}
+  .scrim{position:absolute; inset:0; z-index:2;
+    background:linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.05) 30%, rgba(5,6,4,.55) 62%, rgba(5,6,4,.96) 100%);}
+  .grain{position:absolute; inset:0; z-index:2; opacity:.06; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .content{position:relative; z-index:3; width:100%;
+    padding:clamp(22px,4.2vw,52px) clamp(22px,4.2vw,52px) clamp(22px,4.2vw,52px);}
+  @media (max-aspect-ratio:1/1){ .content{padding:22px 22px 76px} }
+
+  .topline{position:absolute; top:clamp(20px,3.6vw,44px); left:clamp(20px,4.2vw,52px);
+    right:clamp(20px,4.2vw,52px); z-index:4; display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  @media (max-aspect-ratio:1/1){ .topline{top:max(26px,calc(env(safe-area-inset-top) + 14px)); left:18px; right:18px} }
+  .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 15px; border-radius:100px;
+    font-weight:700; font-size:clamp(11px,1.1vw,13px); letter-spacing:.12em; text-transform:uppercase;
+    backdrop-filter:blur(6px); background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.2)}
+  .chip .dot{width:9px;height:9px;border-radius:50%}
+  .daynum{font-family:'Fraunces',serif; font-weight:300; font-size:clamp(12px,1.3vw,15px);
+    letter-spacing:.3em; text-transform:uppercase; opacity:.85; text-align:right; white-space:nowrap;
+    text-shadow:0 2px 10px rgba(0,0,0,.7); padding-top:4px}
+
+  .date{font-weight:700; font-size:clamp(12px,1.3vw,15px); letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:9px; transform:translateY(16px); opacity:0; transition:.6s var(--ease) .12s;}
+  .title{font-family:'Fraunces',serif; font-weight:600; line-height:1.0; letter-spacing:-.01em;
+    font-size:clamp(34px,6vw,78px); text-shadow:0 4px 26px rgba(0,0,0,.6);
+    transform:translateY(20px); opacity:0; transition:.7s var(--ease) .22s; max-width:18ch;}
+  @media (max-aspect-ratio:1/1){ .title{font-size:34px; max-width:none} }
+  .pf{display:inline-block; margin-top:13px; padding:9px 15px; border-radius:10px;
+    background:linear-gradient(100deg, rgba(216,162,74,.23), rgba(216,162,74,.06));
+    border:1px solid rgba(216,162,74,.42); font-weight:700; font-size:clamp(13px,1.4vw,16px); color:#f3dca8; backdrop-filter:blur(4px);
+    transform:translateY(16px); opacity:0; transition:.7s var(--ease) .42s;}
+  .desc{margin-top:14px; font-size:clamp(14px,1.5vw,18px); line-height:1.52; color:rgba(244,239,228,.92);
+    max-width:56ch; text-shadow:0 2px 14px rgba(0,0,0,.55); transform:translateY(16px); opacity:0; transition:.7s var(--ease) .34s;}
+  @media (max-aspect-ratio:1/1){ .desc{max-width:none; font-size:14.5px} }
+
+  .meta{margin-top:clamp(16px,2.2vw,28px); display:flex; flex-wrap:wrap; gap:clamp(10px,1.5vw,20px);
+    transform:translateY(16px); opacity:0; transition:.7s var(--ease) .5s;}
+  .stat{display:flex; flex-direction:column; gap:4px; padding-right:clamp(10px,1.5vw,20px);
+    border-right:1px solid rgba(255,255,255,.18)}
+  .stat:last-child{border-right:none}
+  .stat .lab{font-size:clamp(10px,1vw,11px); letter-spacing:.13em; text-transform:uppercase; opacity:.64; font-weight:700}
+  .stat .val{font-family:'Fraunces',serif; font-size:clamp(16px,2vw,25px); font-weight:500; display:flex; align-items:center; gap:6px; text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .stat .val.gold{color:var(--gold)}
+  .stars{color:var(--gold); font-size:.65em; letter-spacing:.5px}
+  /* en portrait : grille 2 colonnes sans séparateurs */
+  @media (max-aspect-ratio:1/1){
+    .meta{display:grid; grid-template-columns:1fr 1fr; gap:13px 14px}
+    .stat{padding-right:0; border-right:none}
+    .stat .val{font-size:18px}
+  }
+  .slide.active .date,.slide.active .title,.slide.active .pf,
+  .slide.active .desc,.slide.active .meta{transform:translateY(0); opacity:1}
+
+  /* COVER */
+  .cover .content{justify-content:center; text-align:center; align-items:center; display:flex; flex-direction:column; height:100%}
+  @media (max-aspect-ratio:1/1){ .cover .content{padding-bottom:90px} }
+  .cover .title{max-width:none; font-size:clamp(46px,9vw,120px); font-style:italic; font-weight:500}
+  @media (max-aspect-ratio:1/1){ .cover .title{font-size:62px} }
+  .cover .kicker{font-weight:700; letter-spacing:.4em; text-transform:uppercase; font-size:clamp(12px,1.3vw,15px); color:var(--gold);
+    transform:translateY(16px); opacity:0; transition:.6s var(--ease) .2s; text-shadow:0 2px 10px rgba(0,0,0,.7)}
+  .cover .sub{margin-top:17px; font-size:clamp(15px,1.7vw,21px); line-height:1.5; opacity:.9; max-width:28ch;
+    transform:translateY(16px); opacity:0; transition:.6s var(--ease) .46s; text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  .cover.slide.active .kicker,.cover.slide.active .sub{transform:translateY(0); opacity:1}
+
+  /* INFO */
+  .infoslide .content{justify-content:center; height:100%; display:flex; flex-direction:column}
+  @media (max-aspect-ratio:1/1){ .infoslide .content{padding-bottom:90px} }
+  .infogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(12px,1.8vw,22px); margin-top:20px; max-width:920px}
+  @media (max-aspect-ratio:1/1){ .infogrid{grid-template-columns:1fr; gap:11px; max-width:none} }
+  .infocard{background:rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.15); border-radius:13px;
+    padding:clamp(13px,1.8vw,22px); backdrop-filter:blur(6px)}
+  .infocard h4{font-family:'Fraunces',serif; font-weight:500; font-size:clamp(15px,1.9vw,21px); margin-bottom:6px; color:var(--gold)}
+  .infocard p{font-size:clamp(12.5px,1.35vw,15.5px); line-height:1.46; opacity:.9}
+
+  /* MAP */
+  .mapslide .content{height:100%; justify-content:flex-end; display:flex; flex-direction:column; text-align:center; align-items:center}
+  @media (max-aspect-ratio:1/1){ .mapslide .content{padding-bottom:90px} }
+  .mapwrap{position:absolute; inset:0; z-index:1; display:grid; place-items:center; padding:clamp(40px,6vw,70px)}
+  .mapwrap svg{width:100%; height:100%; max-height:78%}
+  .map-tall{display:none}
+  @media (max-aspect-ratio:1/1){ .map-wide{display:none} .map-tall{display:block} }
+  .coast{fill:#13332a; stroke:#3fae74; stroke-width:2.2; filter:drop-shadow(0 8px 28px rgba(0,0,0,.5))}
+  .route{fill:none; stroke:var(--gold); stroke-width:3.6; stroke-dasharray:11 11; stroke-linecap:round;
+    filter:drop-shadow(0 0 6px rgba(216,162,74,.6))}
+  .slide.active .route{animation:dash 5.6s linear forwards}
+  @keyframes dash{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+  .pin circle.h{fill:rgba(216,162,74,.2)}
+  .pin circle.c{fill:var(--gold); stroke:#1a1408; stroke-width:2}
+  .pin text{font-family:'Manrope'; font-weight:800; fill:#fff; paint-order:stroke; stroke:#06140f; stroke-width:5}
+  .pin text.sm{font-weight:600; fill:#cfe0d8; opacity:.9}
+  .maptitle{position:relative; z-index:3; font-family:'Fraunces',serif; font-style:italic;
+    font-size:clamp(28px,4.4vw,52px); text-shadow:0 3px 18px rgba(0,0,0,.7)}
+  .mapsub{position:relative; z-index:3; margin-top:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    font-size:clamp(11px,1.2vw,14px); color:var(--gold); text-shadow:0 2px 10px rgba(0,0,0,.7); max-width:30ch}
+
+  /* PROGRESS — stories en haut (mobile) / barre en bas (bureau) */
+  .bars{position:absolute; top:max(12px,env(safe-area-inset-top)); left:14px; right:14px; z-index:8;
+    display:flex; gap:5px; pointer-events:none}
+  .bars i{flex:1; height:3px; border-radius:3px; background:rgba(255,255,255,.28); overflow:hidden; position:relative}
+  .bars i .f{position:absolute; inset:0; width:0; background:var(--gold); border-radius:3px}
+  .bars i.done .f{width:100%}
+  @media (min-aspect-ratio:1/1){ .bars{display:none} }
+  .botbar{position:absolute; left:0; right:0; bottom:0; z-index:6; height:3px; background:rgba(255,255,255,.12)}
+  .botbar .f{height:100%; width:0; background:linear-gradient(90deg,var(--gold),#f3e2bc)}
+  @media (max-aspect-ratio:1/1){ .botbar{display:none} }
+
+  /* counter (bureau seulement) */
+  .counter{position:absolute; z-index:7; bottom:24px; left:24px; font-family:'Fraunces',serif;
+    font-size:clamp(13px,1.4vw,16px); letter-spacing:.2em; opacity:.9; text-shadow:0 2px 10px rgba(0,0,0,.7)}
+  .counter b{color:var(--gold)}
+  @media (max-aspect-ratio:1/1){ .counter{display:none} }
+
+  /* tap zones (mobile) */
+  .tap{position:absolute; top:60px; bottom:84px; width:34%; z-index:5; cursor:pointer; display:none}
+  .tap.left{left:0} .tap.right{right:0}
+  @media (max-aspect-ratio:1/1){ .tap{display:block} }
+
+  /* controls : bas-droite en bureau, centrés en mobile */
+  .ctrls{position:absolute; z-index:7; bottom:18px; right:20px; display:flex; gap:8px; align-items:center}
+  @media (max-aspect-ratio:1/1){
+    .ctrls{right:0; left:0; bottom:max(20px,calc(env(safe-area-inset-bottom) + 8px)); justify-content:center; gap:22px}
+  }
+  .ctrls button{width:42px;height:42px;border-radius:50%; border:1px solid rgba(255,255,255,.24);
+    background:rgba(0,0,0,.48); color:#fff; cursor:pointer; backdrop-filter:blur(6px);
+    display:grid; place-items:center; font-size:16px; transition:.2s}
+  .ctrls button:hover{background:rgba(216,162,74,.95); color:#111; border-color:transparent}
+  .ctrls button:active{transform:scale(.9)}
+  @media (max-aspect-ratio:1/1){
+    .ctrls button{width:50px;height:50px;font-size:18px}
+    .ctrls #play{width:58px;height:58px;font-size:20px}
+  }
+
+  .hint{position:absolute; z-index:7; left:0; right:0; text-align:center; font-size:11px;
+    letter-spacing:.12em; text-transform:uppercase; opacity:.5; transition:opacity .5s; pointer-events:none; display:none;
+    bottom:max(86px,calc(env(safe-area-inset-bottom) + 66px));}
+  @media (max-aspect-ratio:1/1){ .hint{display:block} }
+  .hint.hide{opacity:0}
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="bars" id="bars"></div>
+  <div class="stage" id="stage"></div>
+  <div class="tap left" id="tapL"></div>
+  <div class="tap right" id="tapR"></div>
+  <div class="counter" id="counter"></div>
+  <div class="hint" id="hint">← glissez pour naviguer →</div>
+  <div class="ctrls">
+    <button id="prev" title="Précédent">‹</button>
+    <button id="play" title="Lecture / Pause">⏸</button>
+    <button id="next" title="Suivant">›</button>
+  </div>
+  <div class="botbar"><div class="f" id="fill"></div></div>
+</div>
+
+<script>
+const T = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+const U = (p,f) => T+p+"/"+f+"/1280px-"+f;
+const IMG = {
+  hero:   U("d/d0","Mount_Agung_Sunrise_(Unsplash).jpg"),
+  jati:   U("c/cf","Rice_fields_at_Jatiluwih._Bali,_Indonesia.JPG"),
+  fall:   U("2/28","Air_Terjun_Sekumpul.jpg"),
+  lake:   U("2/2d","Danau_Tamblingan.jpg"),
+  rice2:  U("0/0f","Bali_Rice_Terrace.JPG"),
+  springs:U("4/44","Thermes_d'Air_Panas_Banjar.JPG"),
+  coast:  U("a/a9","Bali-amed-landscape-sunrise.jpg"),
+  jukung: U("2/2d","Amed_beach.jpg"),
+  tirta:  U("8/85","Tirta_Gangga_water_palace,_Bali,_Indonesia.JPG"),
+  agung:  U("3/36","View_of_Mount_Agung_from_a_beach_in_Bali,_Indonesia.jpg"),
+  sunset: U("5/50","Amed_Beach_during_sunset.JPG"),
+  batur:  U("4/48","Sunrise_at_Mt_Batur,_Bali.jpg"),
+  food:   U("1/1f","Nasi_Campur_Ayam_Bali.jpg"),
+  sidem:  U("a/ae","Rice_fields,_Rice_terraces,_Tirta_Gangga,_Bali,_Indonesia.jpg"),
+  besakih:U("4/4f","Besakih_Bali_Indonesia_Pura-Besakih-02.jpg"),
+  kehen:  U("7/7c","Gate_of_Pura_Kehen,_Bali.jpg"),
+};
+const BG = {
+  green:"radial-gradient(120% 90% at 50% 15%,#1b5040 0%,#0d2b25 55%,#061513 100%)",
+  blue:"linear-gradient(180deg,#1f6f86 0%,#0c3f56 100%)",
+  warm:"linear-gradient(180deg,#d9663f 0%,#5a2740 100%)",
+  dark:"linear-gradient(180deg,#23314f 0%,#b06a4a 80%,#e0a45a 100%)",
+};
+const STAGES = {
+  munduk:{name:"Munduk",col:"#3fae74"},
+  amed:{name:"Amed",col:"#3fb0d0"},
+  sidemen:{name:"Sidemen",col:"#e09a4a"},
+};
+const stars = r => "★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
+
+const DAYS = [
+  {type:"cover",img:IMG.hero,bg:BG.dark,kicker:"Indonésie · 17 jours",title:"Bali",
+   sub:"Munduk · Amed · Sidemen — 26 juil → 11 août 2026"},
+  {type:"map",title:"L'itinéraire",sub:"Aéroport → Munduk → Amed → Sidemen"},
+
+  {stage:"munduk",img:IMG.jati,bg:BG.green,num:"Jour 01",date:"Sam. 26 juillet",title:"Arrivée & transfert",
+   rating:null,transport:"Chauffeur",travel:"3 h 30",driver:"≈ 35 €",cost:"≈ 3 €/pers",
+   pf:"Le choc visuel",desc:"Des plaines aux montagnes brumeuses du Nord. Arrêt conseillé aux rizières de Jatiluwih (UNESCO)."},
+  {stage:"munduk",img:IMG.fall,bg:BG.green,num:"Jour 02",date:"Dim. 27 juillet",title:"Randonnée des cascades",
+   rating:4.5,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
+   pf:"Nature brute",desc:"Trois cascades majestueuses dans la jungle de Munduk, reliées par un sentier ombragé. Magique au petit matin."},
+  {stage:"munduk",img:IMG.lake,bg:BG.green,num:"Jour 03",date:"Lun. 28 juillet",title:"Lac Tamblingan",
+   rating:4.7,transport:"Pirogue",travel:"20 min",driver:null,cost:"≈ 10 €/pers",
+   pf:"Mystique",desc:"Traversée silencieuse d'un lac sacré en pirogue traditionnelle, entre forêt primaire et temples lacustres."},
+  {stage:"munduk",img:IMG.rice2,bg:BG.green,num:"Jour 04",date:"Mar. 29 juillet",title:"Rizières de Belimbing",
+   rating:4.7,transport:"Chauffeur",travel:"1 h 15",driver:"≈ 25 €",cost:"≈ 2 €/pers",
+   pf:"Sérénité",desc:"Des terrasses de riz sculptées parmi les plus belles de l'île, préservées des foules touristiques."},
+  {stage:"munduk",img:IMG.springs,bg:BG.green,num:"Jour 05",date:"Mer. 30 juillet",title:"Sources de Banjar",
+   rating:4.3,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
+   pf:"Détente locale",desc:"Bains thermaux sacrés au soufre, au cœur de jardins tropicaux luxuriants — un rituel balinais."},
+
+  {stage:"amed",img:IMG.coast,bg:BG.blue,num:"Jour 06",date:"Jeu. 31 juillet",title:"Transfert vers Amed",
+   rating:null,transport:"Chauffeur",travel:"3 h 00",driver:"≈ 40 €",cost:"—",
+   pf:"Panoramique",desc:"Une magnifique route longeant la côte nord de l'île jusqu'au village de pêcheurs d'Amed."},
+  {stage:"amed",img:IMG.jukung,bg:BG.blue,num:"Jour 07",date:"Ven. 1ᵉʳ août",title:"Sortie en jukung",
+   rating:4.9,transport:"Pirogue",travel:"Lever du soleil",driver:null,cost:"≈ 20 €/pers",
+   pf:"Tradition",desc:"Snorkeling au lever du soleil depuis une pirogue à balancier, le Mont Agung en toile de fond."},
+  {stage:"amed",img:IMG.tirta,bg:BG.blue,num:"Jour 08",date:"Sam. 2 août",title:"Tirta Gangga",
+   rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 6 €/pers",
+   pf:"Royal",desc:"Ancien palais aquatique royal, célèbre pour ses bassins, fontaines et pas japonais au-dessus des carpes koï."},
+  {stage:"amed",img:IMG.agung,bg:BG.blue,num:"Jour 09",date:"Dim. 3 août",title:"Baie de Jemeluk",
+   rating:4.4,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
+   pf:"Accessibilité",desc:"Un aquarium naturel multicolore à quelques mètres du bord, accessible directement depuis la plage."},
+  {stage:"amed",img:IMG.sunset,bg:BG.warm,num:"Jour 10",date:"Lun. 4 août",title:"Sunset Hills",
+   rating:3.8,transport:"Scooter",travel:"15 min",driver:null,cost:"≈ 9 €/pers",
+   pf:"Le panorama",desc:"La vue iconique du volcan se reflétant dans la mer au coucher du soleil. On vient pour le décor."},
+
+  {stage:"sidemen",img:IMG.batur,bg:BG.dark,num:"Jour 11",date:"Mar. 5 août",title:"Ascension du Batur",
+   rating:4.8,transport:"Navette",travel:"1 h 15",driver:"≈ 30 €",cost:"≈ 35 €/pers",
+   pf:"L'apothéose",desc:"Lever de soleil inoubliable depuis le sommet du volcan, au-dessus de la mer de nuages. Départ nocturne."},
+  {stage:"sidemen",img:IMG.food,bg:BG.green,num:"Jour 12",date:"Mer. 6 août",title:"Cours de cuisine",
+   rating:4.8,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 22 €/pers",
+   pf:"Immersion",desc:"Les secrets de la cuisine balinaise transmis par une famille locale : marché, épices et plats traditionnels."},
+  {stage:"sidemen",img:IMG.sidem,bg:BG.green,num:"Jour 13",date:"Jeu. 7 août",title:"Trek de Sidemen",
+   rating:null,transport:"À pied",travel:"3 h",driver:null,cost:"≈ 10 €/pers",
+   pf:"Authenticité",desc:"Le « vrai » Bali à pied, entre rizières en terrasses, rivières et vie de village, sous le Mont Agung."},
+  {stage:"sidemen",img:IMG.besakih,bg:BG.green,num:"Jour 14",date:"Ven. 8 août",title:"Temple de Besakih",
+   rating:4.5,transport:"Chauffeur",travel:"40 min",driver:"≈ 22 €",cost:"≈ 13 €/pers",
+   pf:"Spiritualité",desc:"Le « Temple Mère » : le plus grand et le plus saint complexe de Bali, étagé sur les pentes du volcan."},
+  {stage:"sidemen",img:IMG.kehen,bg:BG.green,num:"Jour 15",date:"Dim. 10 août",title:"Temple Kehen",
+   rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
+   pf:"Architecture",desc:"Un bijou historique du IXᵉ siècle, en terrasses sous un banian millénaire, préservé du tourisme de masse."},
+
+  {type:"info",img:IMG.sidem,bg:BG.green,num:"Infos pratiques",title:"Budget & conseils",
+   cards:[
+     {h:"Transferts chauffeur · ≈ 250 €/véhicule",p:"DPS→Munduk 35 € · Belimbing 25 € · Banjar 22 € · Munduk→Amed 40 € · Tirta Gangga 22 € · Batur 30 € · Besakih 22 € · Kehen 22 € · Sidemen→DPS 32 €. Par voiture, carburant inclus."},
+     {h:"Activités · ≈ 150 €/pers",p:"Entrées de sites, pirogues, snorkeling, trek du Batur et cours de cuisine. Temples et rizières : 2 à 13 €."},
+     {h:"Tenue & temples",p:"Sarong obligatoire pour tous les temples (location sur place). Chaussures de marche et coupe-vent pour le Batur."},
+     {h:"Philosophie du voyage",p:"Seulement 3 points de chute pour limiter les trajets : authenticité, randonnée et immersion locale."}
+   ]},
+  {type:"map",title:"Selamat jalan",sub:"17 jours · 3 étapes · 15 expériences"},
+];
+
+/* ---- cartes : version large (bureau) + version haute (mobile) ---- */
+function mapWide(){
+  const pins=[
+    {x:568,y:462,l:"Aéroport DPS",sm:true,s:21},
+    {x:496,y:148,l:"Munduk",s:21},
+    {x:933,y:200,l:"Amed",s:21},
+    {x:778,y:277,l:"Sidemen",s:21},
+  ];
+  const route="M568,462 C500,360 470,250 496,148 C560,150 800,150 933,200 C860,235 820,260 778,277 C700,330 600,400 568,462";
+  const coast="M70,178 Q210,150 360,142 Q520,135 680,142 Q840,150 930,162 Q990,185 980,212 Q960,245 880,272 Q800,300 700,330 Q640,348 600,355 L590,360 Q610,400 600,452 Q560,490 500,470 Q470,440 500,402 Q540,372 560,360 Q470,360 380,352 Q280,338 200,300 Q120,255 70,178 Z";
+  const p=pins.map(pn=>`<g class="pin">
+      <circle class="h" cx="${pn.x}" cy="${pn.y}" r="22"/><circle class="c" cx="${pn.x}" cy="${pn.y}" r="8"/>
+      <text class="${pn.sm?'sm':''}" x="${pn.x}" y="${pn.y-18}" text-anchor="middle" style="font-size:${pn.s}px">${pn.l}</text></g>`).join('');
+  return `<svg class="map-wide" viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg"><path class="coast" d="${coast}"/><path class="route" d="${route}"/>${p}</svg>`;
+}
+function mapTall(){
+  const pins=[
+    {x:300,y:300,l:"Aéroport",sm:true,s:26},
+    {x:250,y:96,l:"Munduk",s:26},
+    {x:520,y:130,l:"Amed",s:26},
+    {x:430,y:180,l:"Sidemen",s:26},
+  ];
+  const route="M300,300 C250,230 230,160 250,96 C320,98 460,100 520,130 C480,150 455,165 430,180 C380,225 330,265 300,300";
+  const coast="M40,118 Q140,98 250,92 Q360,88 470,94 Q560,100 600,112 Q625,128 615,148 Q598,172 540,190 Q470,210 410,232 Q380,245 360,250 Q380,290 360,322 Q330,352 290,338 Q270,312 295,288 Q320,270 330,258 Q260,256 200,248 Q120,234 80,200 Q45,165 40,118 Z";
+  const p=pins.map(pn=>`<g class="pin">
+      <circle class="h" cx="${pn.x}" cy="${pn.y}" r="20"/><circle class="c" cx="${pn.x}" cy="${pn.y}" r="7"/>
+      <text class="${pn.sm?'sm':''}" x="${pn.x}" y="${pn.y-16}" text-anchor="middle" style="font-size:${pn.s}px">${pn.l}</text></g>`).join('');
+  return `<svg class="map-tall" viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg"><path class="coast" d="${coast}"/><path class="route" d="${route}"/>${p}</svg>`;
+}
+
+const stage=document.getElementById('stage');
+DAYS.forEach(d=>{
+  const s=document.createElement('div');
+  s.className='slide '+(d.type==='cover'?'cover ':'')+(d.type==='info'?'infoslide ':'')+(d.type==='map'?'mapslide ':'');
+  const photo = d.img ? `<img class="photo" src="${d.img}" alt="" referrerpolicy="no-referrer" loading="eager" onerror="this.style.display='none'">` : '';
+  const sceneBg = d.type==='map'
+     ? `<div class="bg" style="background:radial-gradient(120% 100% at 50% 18%,#0e3a30 0%,#08221d 60%,#050f0c 100%)"></div>`
+     : `<div class="bg" style="background:${d.bg||BG.green}"></div>${photo}`;
+  const scene = `<div class="scene">${sceneBg}<div class="scrim"></div><div class="grain"></div></div>`;
+  let body='';
+  if(d.type==='cover'){
+    body=`<div class="content"><div class="kicker">${d.kicker}</div><h1 class="title">${d.title}</h1><div class="sub">${d.sub}</div></div>`;
+  } else if(d.type==='map'){
+    body=`<div class="mapwrap">${mapWide()}${mapTall()}</div>
+      <div class="content"><div class="maptitle">${d.title}</div><div class="mapsub">${d.sub}</div></div>`;
+  } else if(d.type==='info'){
+    body=`<div class="topline"><span class="chip"><span class="dot" style="background:var(--gold)"></span>${d.num}</span></div>
+      <div class="content"><h2 class="title" style="font-size:clamp(28px,4.6vw,56px)">${d.title}</h2>
+      <div class="infogrid">${d.cards.map(c=>`<div class="infocard"><h4>${c.h}</h4><p>${c.p}</p></div>`).join('')}</div></div>`;
+  } else {
+    const st=STAGES[d.stage];
+    const rate=d.rating?`<div class="stat"><span class="lab">Note Google</span><span class="val gold">${d.rating.toFixed(1)} <span class="stars">${stars(d.rating)}</span></span></div>`:'';
+    const drv=d.driver?`<div class="stat"><span class="lab">Trajet chauffeur</span><span class="val gold">${d.driver}</span></div>`:'';
+    body=`<div class="topline">
+        <span class="chip"><span class="dot" style="background:${st.col}"></span>${st.name}</span>
+        <span class="daynum">${d.num}</span></div>
+      <div class="content">
+        <div class="date">${d.date}</div>
+        <h2 class="title">${d.title}</h2>
+        <span class="pf">★ ${d.pf}</span>
+        <p class="desc">${d.desc}</p>
+        <div class="meta">
+          ${rate}
+          <div class="stat"><span class="lab">Transport</span><span class="val">${d.transport}</span></div>
+          <div class="stat"><span class="lab">Durée trajet</span><span class="val">${d.travel}</span></div>
+          ${drv}
+          <div class="stat"><span class="lab">Coût activité</span><span class="val">${d.cost}</span></div>
+        </div>
+      </div>`;
+  }
+  s.innerHTML=scene+body;
+  stage.appendChild(s);
+});
+
+const slides=[...document.querySelectorAll('.slide')];
+const barsEl=document.getElementById('bars');
+slides.forEach(()=>{const i=document.createElement('i');i.innerHTML='<div class="f"></div>';barsEl.appendChild(i);});
+const barEls=[...barsEl.children];
+const fill=document.getElementById('fill');
+const counter=document.getElementById('counter');
+const playBtn=document.getElementById('play');
+const hint=document.getElementById('hint');
+
+let cur=0, playing=true, t0=0;
+const DUR_SHORT=5400, DUR=8600;
+const dur=i=>(DAYS[i].type==='cover'||DAYS[i].type==='map')?DUR_SHORT:DUR;
+
+function render(){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  barEls.forEach((b,i)=>{ b.classList.toggle('done', i<cur); b.querySelector('.f').style.width = i<cur?'100%':'0%'; });
+  counter.innerHTML=`<b>${String(cur+1).padStart(2,'0')}</b> / ${String(slides.length).padStart(2,'0')}`;
+}
+function go(i){cur=(i+slides.length)%slides.length; t0=performance.now(); render();}
+const next=()=>go(cur+1), prev=()=>go(cur-1);
+
+function loop(now){
+  if(playing){
+    if(!t0)t0=now;
+    const p=Math.min((now-t0)/dur(cur),1);
+    fill.style.width=(p*100)+'%';
+    barEls[cur].querySelector('.f').style.width=(p*100)+'%';
+    if(p>=1){ if(cur===slides.length-1){playing=false;playBtn.textContent='↺';} else next(); }
+  }
+  requestAnimationFrame(loop);
+}
+function setPlay(v){playing=v;playBtn.textContent=v?'⏸':'▶';t0=performance.now();}
+playBtn.onclick=()=>{ if(playBtn.textContent==='↺'){go(0);setPlay(true);} else setPlay(!playing); };
+document.getElementById('next').onclick=()=>{hideHint();next();};
+document.getElementById('prev').onclick=()=>{hideHint();prev();};
+document.getElementById('tapR').onclick=()=>{hideHint();next();};
+document.getElementById('tapL').onclick=()=>{hideHint();prev();};
+
+const frame=document.getElementById('frame');
+let sx=0, sy=0, swiping=false;
+frame.addEventListener('touchstart',e=>{sx=e.touches[0].clientX; sy=e.touches[0].clientY; swiping=true;},{passive:true});
+frame.addEventListener('touchend',e=>{
+  if(!swiping)return; swiping=false;
+  const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ hideHint(); dx<0?next():prev(); }
+},{passive:true});
+
+function hideHint(){hint.classList.add('hide');}
+setTimeout(hideHint,4200);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')next();
+  else if(e.key==='ArrowLeft')prev();
+  else if(e.key===' '){e.preventDefault();setPlay(!playing);}
+});
+render(); requestAnimationFrame(loop);
+</script>
+</body>
+</html>
