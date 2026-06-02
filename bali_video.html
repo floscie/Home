@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali — Itinéraire Vidéo · 26 Juil → 11 Août 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe4; --gold:#d8a24a;
+    --shadow:0 30px 80px -20px rgba(0,0,0,.7);
+    --ease:cubic-bezier(.16,.84,.32,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#070806; color:var(--paper); font-family:'Manrope',sans-serif;
+    display:flex; align-items:center; justify-content:center; overflow:hidden; -webkit-font-smoothing:antialiased;}
+  .frame{position:relative; width:100%; max-width:1180px; aspect-ratio:16/9;
+    border-radius:18px; overflow:hidden; box-shadow:var(--shadow); background:#0a0c08;}
+  @media (max-aspect-ratio:16/9){ .frame{height:auto} }
+
+  .stage{position:absolute; inset:0}
+  .slide{position:absolute; inset:0; opacity:0; visibility:hidden;
+    transition:opacity .9s var(--ease), visibility .9s; display:flex; flex-direction:column; justify-content:flex-end;}
+  .slide.active{opacity:1; visibility:visible}
+
+  .scene{position:absolute; inset:0; overflow:hidden}
+  .scene .bg{position:absolute; inset:-4%}
+  .scene .photo{position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; z-index:1}
+  .slide.active .scene .bg,.slide.active .scene .photo{animation:kenburns 9.5s ease-out forwards}
+  @keyframes kenburns{from{transform:scale(1.0) translate(0,0)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
+  .scrim{position:absolute; inset:0; z-index:2;
+    background:linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.05) 32%, rgba(5,6,4,.55) 66%, rgba(5,6,4,.95) 100%);}
+  .grain{position:absolute; inset:0; z-index:2; opacity:.06; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .content{position:relative; z-index:3; padding:clamp(22px,4.2vw,52px); width:100%}
+  .topline{position:absolute; top:clamp(20px,3.6vw,44px); left:clamp(22px,4.2vw,52px);
+    right:clamp(22px,4.2vw,52px); z-index:3; display:flex; justify-content:space-between; align-items:flex-start;}
+  .chip{display:inline-flex; align-items:center; gap:8px; padding:7px 15px; border-radius:100px;
+    font-weight:700; font-size:clamp(11px,1.1vw,13px); letter-spacing:.14em; text-transform:uppercase;
+    backdrop-filter:blur(6px); background:rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.18)}
+  .chip .dot{width:9px;height:9px;border-radius:50%}
+  .daynum{font-family:'Fraunces',serif; font-weight:300; font-size:clamp(13px,1.3vw,15px);
+    letter-spacing:.32em; text-transform:uppercase; opacity:.85; text-align:right; text-shadow:0 2px 12px rgba(0,0,0,.6)}
+
+  .date{font-family:'Manrope'; font-weight:600; font-size:clamp(13px,1.3vw,15px);
+    letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+    transform:translateY(18px); opacity:0; transition:.7s var(--ease) .15s;}
+  .title{font-family:'Fraunces',serif; font-weight:600; line-height:.98;
+    font-size:clamp(34px,6.2vw,80px); letter-spacing:-.01em; max-width:18ch; text-shadow:0 4px 30px rgba(0,0,0,.6);
+    transform:translateY(24px); opacity:0; transition:.8s var(--ease) .26s;}
+  .desc{margin-top:16px; max-width:56ch; font-size:clamp(14px,1.5vw,18px); line-height:1.55;
+    color:rgba(244,239,228,.92); text-shadow:0 2px 16px rgba(0,0,0,.5);
+    transform:translateY(22px); opacity:0; transition:.8s var(--ease) .42s;}
+
+  .meta{margin-top:clamp(16px,2.2vw,28px); display:flex; flex-wrap:wrap; gap:clamp(10px,1.5vw,20px);
+    transform:translateY(22px); opacity:0; transition:.8s var(--ease) .56s;}
+  .stat{display:flex; flex-direction:column; gap:4px; padding-right:clamp(10px,1.5vw,20px);
+    border-right:1px solid rgba(255,255,255,.18)}
+  .stat:last-child{border-right:none}
+  .stat .lab{font-size:11px; letter-spacing:.15em; text-transform:uppercase; opacity:.65; font-weight:600}
+  .stat .val{font-family:'Fraunces',serif; font-size:clamp(16px,2vw,25px); font-weight:500; display:flex; align-items:center; gap:7px; text-shadow:0 2px 12px rgba(0,0,0,.5)}
+  .stat .val.gold{color:var(--gold)}
+  .stars{color:var(--gold); font-size:.7em; letter-spacing:1px}
+  .pf{display:inline-block; margin-top:14px; padding:9px 16px; border-radius:10px;
+    background:linear-gradient(100deg, rgba(216,162,74,.22), rgba(216,162,74,.06));
+    border:1px solid rgba(216,162,74,.4); font-weight:700; letter-spacing:.02em;
+    font-size:clamp(13px,1.4vw,16px); color:#f3dca8; backdrop-filter:blur(4px);
+    transform:translateY(20px); opacity:0; transition:.8s var(--ease) .5s;}
+  .slide.active .date,.slide.active .title,.slide.active .desc,
+  .slide.active .meta,.slide.active .pf{transform:translateY(0); opacity:1}
+
+  .cover .content{justify-content:center; text-align:center; align-items:center; display:flex; flex-direction:column; height:100%}
+  .cover .title{max-width:none; font-size:clamp(46px,9vw,120px); font-style:italic; font-weight:500}
+  .cover .kicker{font-weight:700; letter-spacing:.42em; text-transform:uppercase; font-size:clamp(12px,1.3vw,15px); color:var(--gold);
+    transform:translateY(18px); opacity:0; transition:.7s var(--ease) .2s; text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .cover .sub{margin-top:18px; font-size:clamp(15px,1.7vw,21px); letter-spacing:.04em; opacity:.9; max-width:30ch;
+    transform:translateY(18px); transition:.7s var(--ease) .5s; text-shadow:0 2px 14px rgba(0,0,0,.6)}
+  .cover.slide.active .kicker,.cover.slide.active .sub{transform:translateY(0); opacity:1}
+
+  .infoslide .content{justify-content:center; height:100%; display:flex; flex-direction:column}
+  .infogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(12px,1.8vw,22px); margin-top:22px; max-width:920px}
+  .infocard{background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.15); border-radius:14px;
+    padding:clamp(14px,1.8vw,22px); backdrop-filter:blur(6px)}
+  .infocard h4{font-family:'Fraunces',serif; font-weight:500; font-size:clamp(16px,1.9vw,21px); margin-bottom:7px; color:var(--gold)}
+  .infocard p{font-size:clamp(12.5px,1.35vw,15.5px); line-height:1.5; opacity:.92}
+
+  /* MAP */
+  .mapslide .content{height:100%; justify-content:center; align-items:center; display:flex; flex-direction:column; text-align:center}
+  .mapwrap{position:absolute; inset:0; z-index:1; display:grid; place-items:center}
+  .mapwrap svg{width:92%; height:92%}
+  .coast{fill:#13332a; stroke:#3fae74; stroke-width:2; filter:drop-shadow(0 8px 30px rgba(0,0,0,.5))}
+  .route{fill:none; stroke:var(--gold); stroke-width:3.4; stroke-dasharray:10 10; stroke-linecap:round;
+    filter:drop-shadow(0 0 6px rgba(216,162,74,.6))}
+  .slide.active .route{animation:dash 6s linear forwards}
+  @keyframes dash{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+  .pin circle.h{fill:rgba(216,162,74,.18)}
+  .pin circle.c{fill:var(--gold); stroke:#1a1408; stroke-width:2}
+  .pin text{font-family:'Manrope'; font-weight:700; font-size:21px; fill:#fff; paint-order:stroke; stroke:#06140f; stroke-width:5}
+  .pin text.sm{font-weight:500; font-size:16px; fill:#cfe0d8; opacity:.85; stroke-width:4}
+  .maptitle{position:relative; z-index:3; font-family:'Fraunces',serif; font-style:italic;
+    font-size:clamp(26px,4.4vw,52px); text-shadow:0 3px 20px rgba(0,0,0,.7)}
+  .mapsub{position:relative; z-index:3; margin-top:10px; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+    font-size:clamp(11px,1.2vw,14px); color:var(--gold); text-shadow:0 2px 12px rgba(0,0,0,.7)}
+
+  .bar{position:absolute; left:0; right:0; bottom:0; z-index:6; height:3px; background:rgba(255,255,255,.12)}
+  .bar .fill{height:100%; width:0; background:linear-gradient(90deg,var(--gold),#f3e2bc)}
+  .ctrls{position:absolute; z-index:7; bottom:18px; right:20px; display:flex; gap:8px; align-items:center}
+  .ctrls button{width:42px;height:42px;border-radius:50%; border:1px solid rgba(255,255,255,.22);
+    background:rgba(0,0,0,.45); color:#fff; cursor:pointer; backdrop-filter:blur(6px);
+    display:grid; place-items:center; transition:.25s; font-size:16px}
+  .ctrls button:hover{background:rgba(216,162,74,.95); color:#111; border-color:transparent; transform:translateY(-2px)}
+  .counter{position:absolute; z-index:7; bottom:24px; left:24px; font-family:'Fraunces',serif;
+    font-size:clamp(13px,1.4vw,16px); letter-spacing:.2em; opacity:.9; text-shadow:0 2px 10px rgba(0,0,0,.7)}
+  .counter b{color:var(--gold)}
+  .dots{position:absolute; z-index:7; bottom:26px; left:50%; transform:translateX(-50%);
+    display:flex; gap:6px; flex-wrap:wrap; max-width:58%; justify-content:center}
+  .dots i{width:7px;height:7px;border-radius:50%; background:rgba(255,255,255,.32); cursor:pointer; transition:.25s}
+  .dots i.on{background:var(--gold); width:20px; border-radius:4px}
+  @media(max-width:680px){ .dots{display:none} .stat{border-right:none} .infogrid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="stage" id="stage"></div>
+  <div class="counter" id="counter"></div>
+  <div class="dots" id="dots"></div>
+  <div class="ctrls">
+    <button id="prev" title="Précédent">‹</button>
+    <button id="play" title="Lecture / Pause">⏸</button>
+    <button id="next" title="Suivant">›</button>
+  </div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+</div>
+
+<script>
+/* ---------- IMAGES (Wikimedia Commons, libres de droits CC / domaine public) ---------- */
+/* URLs directes du CDN upload.wikimedia.org (vignettes 1280px) */
+const T = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+const U = (p,f) => T+p+"/"+f+"/1280px-"+f;
+const IMG = {
+  hero:   U("d/d0","Mount_Agung_Sunrise_(Unsplash).jpg"),
+  jati:   U("c/cf","Rice_fields_at_Jatiluwih._Bali,_Indonesia.JPG"),
+  fall:   U("2/28","Air_Terjun_Sekumpul.jpg"),
+  lake:   U("2/2d","Danau_Tamblingan.jpg"),
+  rice2:  U("0/0f","Bali_Rice_Terrace.JPG"),
+  springs:U("4/44","Thermes_d'Air_Panas_Banjar.JPG"),
+  coast:  U("a/a9","Bali-amed-landscape-sunrise.jpg"),
+  jukung: U("2/2d","Amed_beach.jpg"),
+  tirta:  U("8/85","Tirta_Gangga_water_palace,_Bali,_Indonesia.JPG"),
+  agung:  U("3/36","View_of_Mount_Agung_from_a_beach_in_Bali,_Indonesia.jpg"),
+  sunset: U("5/50","Amed_Beach_during_sunset.JPG"),
+  batur:  U("4/48","Sunrise_at_Mt_Batur,_Bali.jpg"),
+  food:   U("1/1f","Nasi_Campur_Ayam_Bali.jpg"),
+  sidem:  U("a/ae","Rice_fields,_Rice_terraces,_Tirta_Gangga,_Bali,_Indonesia.jpg"),
+  besakih:U("4/4f","Besakih_Bali_Indonesia_Pura-Besakih-02.jpg"),
+  kehen:  U("7/7c","Gate_of_Pura_Kehen,_Bali.jpg"),
+};
+/* CSS fallback gradients (s'affichent si une photo ne charge pas) */
+const BG = {
+  green:"radial-gradient(120% 90% at 50% 15%,#1b5040 0%,#0d2b25 55%,#061513 100%)",
+  blue:"linear-gradient(180deg,#1f6f86 0%,#0c3f56 100%)",
+  warm:"linear-gradient(180deg,#d9663f 0%,#5a2740 100%)",
+  dark:"linear-gradient(180deg,#23314f 0%,#b06a4a 80%,#e0a45a 100%)",
+};
+
+/* ---------- ITINERARY ---------- */
+const STAGES = {
+  munduk:{name:"Étape 1 · Munduk",col:"#3fae74"},
+  amed:{name:"Étape 2 · Amed",col:"#3fb0d0"},
+  sidemen:{name:"Étape 3 · Sidemen",col:"#e09a4a"},
+};
+const stars = r => "★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
+
+const DAYS = [
+  {type:"cover",img:IMG.hero,bg:BG.dark,kicker:"Indonésie · 17 jours",title:"Bali",
+   sub:"Munduk · Amed · Sidemen — du 26 juillet au 11 août 2026"},
+
+  {type:"map",title:"L'itinéraire",sub:"3 points de chute · Aéroport → Munduk → Amed → Sidemen"},
+
+  {stage:"munduk",img:IMG.jati,bg:BG.green,num:"Jour 01",date:"Samedi 26 juillet",title:"Arrivée & transfert vers Munduk",
+   rating:null,transport:"Chauffeur",travel:"3 h 30",driver:"≈ 35 €",cost:"≈ 3 €/pers (Jatiluwih)",
+   pf:"Le choc visuel",desc:"Des plaines aux montagnes brumeuses du Nord. Arrêt conseillé aux rizières de Jatiluwih (UNESCO), sur la route."},
+
+  {stage:"munduk",img:IMG.fall,bg:BG.green,num:"Jour 02",date:"Dimanche 27 juillet",title:"Randonnée des cascades",
+   rating:4.5,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
+   pf:"Nature brute",desc:"Trois cascades majestueuses nichées dans la jungle de Munduk, reliées par un sentier ombragé. Magique au petit matin."},
+
+  {stage:"munduk",img:IMG.lake,bg:BG.green,num:"Jour 03",date:"Lundi 28 juillet",title:"Lac Tamblingan",
+   rating:4.7,transport:"Pirogue",travel:"20 min",driver:null,cost:"≈ 10 €/pers",
+   pf:"Mystique",desc:"Traversée silencieuse d'un lac sacré en pirogue traditionnelle, entre forêt primaire et temples lacustres."},
+
+  {stage:"munduk",img:IMG.rice2,bg:BG.green,num:"Jour 04",date:"Mardi 29 juillet",title:"Rizières de Belimbing",
+   rating:4.7,transport:"Chauffeur",travel:"1 h 15",driver:"≈ 25 €",cost:"≈ 2 €/pers",
+   pf:"Sérénité",desc:"Des terrasses de riz sculptées parmi les plus belles de l'île, presque entièrement préservées des foules."},
+
+  {stage:"munduk",img:IMG.springs,bg:BG.green,num:"Jour 05",date:"Mercredi 30 juillet",title:"Sources de Banjar",
+   rating:4.3,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
+   pf:"Détente locale",desc:"Bains thermaux sacrés au soufre, au cœur de jardins tropicaux luxuriants — un rituel de relaxation balinais."},
+
+  {stage:"amed",img:IMG.coast,bg:BG.blue,num:"Jour 06",date:"Jeudi 31 juillet",title:"Transfert vers Amed",
+   rating:null,transport:"Chauffeur",travel:"3 h 00",driver:"≈ 40 €",cost:"—",
+   pf:"Panoramique",desc:"Une magnifique route longeant la côte nord de l'île, entre mer turquoise et plantations, jusqu'au village de pêcheurs d'Amed."},
+
+  {stage:"amed",img:IMG.jukung,bg:BG.blue,num:"Jour 07",date:"Vendredi 1ᵉʳ août",title:"Sortie en jukung",
+   rating:4.9,transport:"Pirogue locale",travel:"Lever du soleil",driver:null,cost:"≈ 20 €/pers",
+   pf:"Tradition",desc:"Snorkeling au lever du soleil depuis une pirogue à balancier, le Mont Agung en toile de fond. Tortues et bancs de poissons."},
+
+  {stage:"amed",img:IMG.tirta,bg:BG.blue,num:"Jour 08",date:"Samedi 2 août",title:"Tirta Gangga",
+   rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 6 €/pers",
+   pf:"Royal",desc:"Ancien palais aquatique royal, célèbre pour ses bassins, fontaines et pas japonais flottant au-dessus des carpes koï."},
+
+  {stage:"amed",img:IMG.agung,bg:BG.blue,num:"Jour 09",date:"Dimanche 3 août",title:"Baie de Jemeluk",
+   rating:4.4,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
+   pf:"Accessibilité",desc:"Un aquarium naturel multicolore à quelques mètres du bord : récifs et poissons accessibles directement depuis la plage."},
+
+  {stage:"amed",img:IMG.sunset,bg:BG.warm,num:"Jour 10",date:"Lundi 4 août",title:"Sunset Hills",
+   rating:3.8,transport:"Scooter / À pied",travel:"15 min",driver:null,cost:"≈ 9 €/pers",
+   pf:"Le panorama",desc:"La vue iconique du volcan se reflétant dans la mer au coucher du soleil. On vient pour le décor, pas pour la cuisine."},
+
+  {stage:"sidemen",img:IMG.batur,bg:BG.dark,num:"Jour 11",date:"Mardi 5 août",title:"Ascension du Batur",
+   rating:4.8,transport:"Navette",travel:"1 h 15",driver:"≈ 30 € (ou inclus)",cost:"≈ 35 €/pers (trek)",
+   pf:"L'apothéose",desc:"Lever de soleil inoubliable depuis le sommet du volcan, au-dessus de la mer de nuages. Départ nocturne, ~2 h d'ascension."},
+
+  {stage:"sidemen",img:IMG.food,bg:BG.green,num:"Jour 12",date:"Mercredi 6 août",title:"Cours de cuisine",
+   rating:4.8,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 22 €/pers",
+   pf:"Immersion",desc:"Les secrets de la cuisine balinaise transmis par une famille locale : marché, épices, sambal et plats traditionnels."},
+
+  {stage:"sidemen",img:IMG.sidem,bg:BG.green,num:"Jour 13",date:"Jeudi 7 août",title:"Trek de Sidemen",
+   rating:null,transport:"À pied",travel:"3 h",driver:null,cost:"≈ 10 €/pers (guide)",
+   pf:"Authenticité",desc:"Le « vrai » Bali à pied, entre rizières en terrasses, rivières et vie de village, sous le regard du Mont Agung."},
+
+  {stage:"sidemen",img:IMG.besakih,bg:BG.green,num:"Jour 14",date:"Vendredi 8 août",title:"Temple de Besakih",
+   rating:4.5,transport:"Chauffeur",travel:"40 min",driver:"≈ 22 €",cost:"≈ 13 €/pers",
+   pf:"Spiritualité",desc:"Le « Temple Mère » : le plus grand et le plus saint complexe de Bali, étagé sur les pentes du volcan sacré."},
+
+  {stage:"sidemen",img:IMG.kehen,bg:BG.green,num:"Jour 15",date:"Dimanche 10 août",title:"Temple Kehen",
+   rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
+   pf:"Architecture",desc:"Un bijou historique du IXᵉ siècle, en terrasses sous un banian millénaire, préservé du tourisme de masse."},
+
+  {type:"info",img:IMG.sidem,bg:BG.green,num:"Infos pratiques",title:"Budget & conseils",
+   cards:[
+     {h:"Transferts chauffeur (≈ 250 € / véhicule)",p:"DPS→Munduk 35 € · Belimbing 25 € · Banjar 22 € · Munduk→Amed 40 € · Tirta Gangga 22 € · Batur 30 € · Besakih 22 € · Kehen 22 € · Sidemen→DPS 32 €. Prix par voiture, chauffeur privé, carburant inclus."},
+     {h:"Activités (≈ 150 € / pers)",p:"Entrées de sites, pirogues, snorkeling, trek du Batur et cours de cuisine. La plupart des temples et rizières coûtent 2 à 13 €."},
+     {h:"Tenue & temples",p:"Sarong obligatoire pour tous les temples (souvent en location sur place). Bonnes chaussures et coupe-vent pour le sommet du Batur."},
+     {h:"Philosophie du voyage",p:"Seulement 3 points de chute pour limiter les trajets : authenticité, randonnée et immersion locale avant tout."}
+   ]},
+
+  {type:"map",title:"Selamat jalan",sub:"17 jours · 3 étapes · 15 expériences — un Bali authentique"},
+];
+
+/* ---------- MAP BUILDER ---------- */
+function mapSVG(){
+  const pins=[
+    {x:568,y:462,l:"Aéroport DPS",sm:true},
+    {x:496,y:148,l:"Munduk"},
+    {x:933,y:200,l:"Amed"},
+    {x:778,y:277,l:"Sidemen"},
+  ];
+  const route="M568,462 C500,360 470,250 496,148 C560,150 800,150 933,200 C860,235 820,260 778,277 C700,330 600,400 568,462";
+  const coast="M70,178 Q210,150 360,142 Q520,135 680,142 Q840,150 930,162 Q990,185 980,212 Q960,245 880,272 Q800,300 700,330 Q640,348 600,355 L590,360 Q610,400 600,452 Q560,490 500,470 Q470,440 500,402 Q540,372 560,360 Q470,360 380,352 Q280,338 200,300 Q120,255 70,178 Z";
+  let p=pins.map(pn=>`<g class="pin">
+      <circle class="h" cx="${pn.x}" cy="${pn.y}" r="22"/>
+      <circle class="c" cx="${pn.x}" cy="${pn.y}" r="8"/>
+      <text class="${pn.sm?'sm':''}" x="${pn.x}" y="${pn.y-18}" text-anchor="middle">${pn.l}</text>
+    </g>`).join('');
+  return `<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
+    <path class="coast" d="${coast}"/>
+    <path class="route" d="${route}"/>${p}</svg>`;
+}
+
+/* ---------- RENDER ---------- */
+const stage=document.getElementById('stage');
+DAYS.forEach(d=>{
+  const s=document.createElement('div');
+  s.className='slide '+(d.type==='cover'?'cover ':'')+(d.type==='info'?'infoslide ':'')+(d.type==='map'?'mapslide ':'');
+  const photo = d.img ? `<img class="photo" src="${d.img}" alt="" referrerpolicy="no-referrer" loading="eager" onerror="this.style.display='none'">` : '';
+  const sceneBg = d.type==='map'
+     ? `<div class="bg" style="background:radial-gradient(120% 100% at 50% 20%,#0e3a30 0%,#08221d 60%,#050f0c 100%)"></div>`
+     : `<div class="bg" style="background:${d.bg||BG.green}"></div>${photo}`;
+  const scene = `<div class="scene">${sceneBg}<div class="scrim"></div><div class="grain"></div></div>`;
+  let body='';
+  if(d.type==='cover'){
+    body=`<div class="content"><div class="kicker">${d.kicker}</div>
+      <h1 class="title">${d.title}</h1><div class="sub">${d.sub}</div></div>`;
+  } else if(d.type==='map'){
+    body=`<div class="mapwrap">${mapSVG()}</div>
+      <div class="content"><div class="maptitle">${d.title}</div><div class="mapsub">${d.sub}</div></div>`;
+  } else if(d.type==='info'){
+    body=`<div class="topline"><span class="chip"><span class="dot" style="background:var(--gold)"></span>${d.num}</span></div>
+      <div class="content"><h2 class="title" style="font-size:clamp(28px,4.6vw,56px)">${d.title}</h2>
+      <div class="infogrid">${d.cards.map(c=>`<div class="infocard"><h4>${c.h}</h4><p>${c.p}</p></div>`).join('')}</div></div>`;
+  } else {
+    const st=STAGES[d.stage];
+    const rate=d.rating?`<div class="stat"><span class="lab">Note Google</span><span class="val gold">${d.rating.toFixed(1)} <span class="stars">${stars(d.rating)}</span></span></div>`:'';
+    const drv=d.driver?`<div class="stat"><span class="lab">Trajet chauffeur</span><span class="val gold">${d.driver}</span></div>`:'';
+    body=`<div class="topline">
+        <span class="chip"><span class="dot" style="background:${st.col}"></span>${st.name}</span>
+        <span class="daynum">${d.num}</span></div>
+      <div class="content">
+        <div class="date">${d.date}</div>
+        <h2 class="title">${d.title}</h2>
+        <span class="pf">★ ${d.pf}</span>
+        <p class="desc">${d.desc}</p>
+        <div class="meta">
+          ${rate}
+          <div class="stat"><span class="lab">Transport</span><span class="val">${d.transport}</span></div>
+          <div class="stat"><span class="lab">Durée trajet</span><span class="val">${d.travel}</span></div>
+          ${drv}
+          <div class="stat"><span class="lab">Coût activité</span><span class="val">${d.cost}</span></div>
+        </div>
+      </div>`;
+  }
+  s.innerHTML=scene+body;
+  stage.appendChild(s);
+});
+
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+slides.forEach((_,i)=>{const b=document.createElement('i');b.onclick=()=>go(i);dots.appendChild(b);});
+const dotEls=[...dots.children];
+
+let cur=0, playing=true, t0=0;
+const DUR_SHORT=5400, DUR=8400;
+const fill=document.getElementById('fill');
+const counter=document.getElementById('counter');
+const playBtn=document.getElementById('play');
+const dur=i=>(DAYS[i].type==='cover'||DAYS[i].type==='map')?DUR_SHORT:DUR;
+
+function render(){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  dotEls.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  counter.innerHTML=`<b>${String(cur+1).padStart(2,'0')}</b> / ${String(slides.length).padStart(2,'0')}`;
+}
+function go(i){cur=(i+slides.length)%slides.length; t0=performance.now(); render();}
+const next=()=>go(cur+1), prev=()=>go(cur-1);
+
+function loop(now){
+  if(playing){
+    if(!t0)t0=now;
+    const p=Math.min((now-t0)/dur(cur),1);
+    fill.style.width=(p*100)+'%';
+    if(p>=1){ if(cur===slides.length-1){playing=false;playBtn.textContent='↺';} else next(); }
+  }
+  requestAnimationFrame(loop);
+}
+function setPlay(v){playing=v;playBtn.textContent=v?'⏸':'▶';t0=performance.now();}
+playBtn.onclick=()=>{ if(playBtn.textContent==='↺'){go(0);setPlay(true);} else setPlay(!playing); };
+document.getElementById('next').onclick=next;
+document.getElementById('prev').onclick=prev;
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')next();
+  else if(e.key==='ArrowLeft')prev();
+  else if(e.key===' '){e.preventDefault();setPlay(!playing);}
+});
+render(); requestAnimationFrame(loop);
+</script>
+</body>
+</html>
