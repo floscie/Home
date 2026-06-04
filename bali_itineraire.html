@@ -208,6 +208,8 @@ const IMG = {
   sidem:  U("a/ae","Rice_fields,_Rice_terraces,_Tirta_Gangga,_Bali,_Indonesia.jpg"),
   besakih:U("4/4f","Besakih_Bali_Indonesia_Pura-Besakih-02.jpg"),
   kehen:  U("7/7c","Gate_of_Pura_Kehen,_Bali.jpg"),
+  gili:   U("d/de","Gili_Trawangan_(16788754758).jpg"),
+  turtle: U("a/a7","Akumal_Scuba_Diving_-_Turtle_(4317784674).jpg"),
 };
 const BG = {
   green:"radial-gradient(120% 90% at 50% 15%,#1b5040 0%,#0d2b25 55%,#061513 100%)",
@@ -217,72 +219,72 @@ const BG = {
 };
 const STAGES = {
   munduk:{name:"Munduk",col:"#3fae74"},
-  amed:{name:"Amed",col:"#3fb0d0"},
+  gili:{name:"Gili Trawangan",col:"#2cc0d6"},
   sidemen:{name:"Sidemen",col:"#e09a4a"},
 };
 const stars = r => "★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
 
 const DAYS = [
-  {type:"cover",img:IMG.hero,bg:BG.dark,kicker:"Indonésie · 17 jours",title:"Bali",
-   sub:"Munduk · Amed · Sidemen — 26 juil → 11 août 2026"},
-  {type:"map",title:"L'itinéraire",sub:"Aéroport → Munduk → Amed → Sidemen"},
+  {type:"cover",img:IMG.hero,bg:BG.dark,kicker:"Indonésie · 15 jours",title:"Bali",
+   sub:"Munduk · Gili Trawangan · Sidemen — 27 juil → 11 août 2026"},
+  {type:"map",title:"L'itinéraire",sub:"Aéroport → Munduk → Gili Trawangan → Sidemen"},
 
-  {stage:"munduk",img:IMG.jati,bg:BG.green,num:"Jour 01",date:"Sam. 26 juillet",title:"Arrivée & transfert",
-   rating:null,transport:"Chauffeur",travel:"3 h 30",driver:"≈ 35 €",cost:"≈ 3 €/pers",
-   pf:"Le choc visuel",desc:"Des plaines aux montagnes brumeuses du Nord. Arrêt conseillé aux rizières de Jatiluwih (UNESCO)."},
-  {stage:"munduk",img:IMG.fall,bg:BG.green,num:"Jour 02",date:"Dim. 27 juillet",title:"Randonnée des cascades",
+  {stage:"munduk",img:IMG.rice2,bg:BG.green,num:"Jour 01",date:"Lun. 27 juillet",title:"Arrivée & transfert",
+   rating:null,transport:"Chauffeur",travel:"3 h 30",driver:"≈ 35 €",cost:"—",
+   pf:"Le choc visuel",desc:"Atterrissage à Denpasar (12:10) puis route vers les montagnes brumeuses du Nord. Installation à Munduk."},
+  {stage:"munduk",img:IMG.fall,bg:BG.green,num:"Jour 02",date:"Mar. 28 juillet",title:"Randonnée des cascades",
    rating:4.5,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
    pf:"Nature brute",desc:"Trois cascades majestueuses dans la jungle de Munduk, reliées par un sentier ombragé. Magique au petit matin."},
-  {stage:"munduk",img:IMG.lake,bg:BG.green,num:"Jour 03",date:"Lun. 28 juillet",title:"Lac Tamblingan",
+  {stage:"munduk",img:IMG.lake,bg:BG.green,num:"Jour 03",date:"Mer. 29 juillet",title:"Lac Tamblingan",
    rating:4.7,transport:"Pirogue",travel:"20 min",driver:null,cost:"≈ 10 €/pers",
    pf:"Mystique",desc:"Traversée silencieuse d'un lac sacré en pirogue traditionnelle, entre forêt primaire et temples lacustres."},
-  {stage:"munduk",img:IMG.rice2,bg:BG.green,num:"Jour 04",date:"Mar. 29 juillet",title:"Rizières de Belimbing",
-   rating:4.7,transport:"Chauffeur",travel:"1 h 15",driver:"≈ 25 €",cost:"≈ 2 €/pers",
-   pf:"Sérénité",desc:"Des terrasses de riz sculptées parmi les plus belles de l'île, préservées des foules touristiques."},
-  {stage:"munduk",img:IMG.springs,bg:BG.green,num:"Jour 05",date:"Mer. 30 juillet",title:"Sources de Banjar",
+  {stage:"munduk",img:IMG.jati,bg:BG.green,num:"Jour 04",date:"Jeu. 30 juillet",title:"Rizières de Jatiluwih",
+   rating:4.8,transport:"Chauffeur",travel:"1 h 15",driver:"≈ 25 €",cost:"≈ 3 €/pers",
+   pf:"Patrimoine UNESCO",desc:"Les plus vastes terrasses de riz de Bali, classées à l'UNESCO — un paysage sculpté à perte de vue, unique au monde."},
+  {stage:"munduk",img:IMG.springs,bg:BG.green,num:"Jour 05",date:"Ven. 31 juillet",title:"Sources de Banjar",
    rating:4.3,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
    pf:"Détente locale",desc:"Bains thermaux sacrés au soufre, au cœur de jardins tropicaux luxuriants — un rituel balinais."},
 
-  {stage:"amed",img:IMG.coast,bg:BG.blue,num:"Jour 06",date:"Jeu. 31 juillet",title:"Transfert vers Amed",
-   rating:null,transport:"Chauffeur",travel:"3 h 00",driver:"≈ 40 €",cost:"—",
-   pf:"Panoramique",desc:"Une magnifique route longeant la côte nord de l'île jusqu'au village de pêcheurs d'Amed."},
-  {stage:"amed",img:IMG.jukung,bg:BG.blue,num:"Jour 07",date:"Ven. 1ᵉʳ août",title:"Sortie en jukung",
-   rating:4.9,transport:"Pirogue",travel:"Lever du soleil",driver:null,cost:"≈ 20 €/pers",
-   pf:"Tradition",desc:"Snorkeling au lever du soleil depuis une pirogue à balancier, le Mont Agung en toile de fond."},
-  {stage:"amed",img:IMG.tirta,bg:BG.blue,num:"Jour 08",date:"Sam. 2 août",title:"Tirta Gangga",
-   rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 6 €/pers",
-   pf:"Royal",desc:"Ancien palais aquatique royal, célèbre pour ses bassins, fontaines et pas japonais au-dessus des carpes koï."},
-  {stage:"amed",img:IMG.agung,bg:BG.blue,num:"Jour 09",date:"Dim. 3 août",title:"Baie de Jemeluk",
-   rating:4.4,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 3 €/pers",
-   pf:"Accessibilité",desc:"Un aquarium naturel multicolore à quelques mètres du bord, accessible directement depuis la plage."},
-  {stage:"amed",img:IMG.sunset,bg:BG.warm,num:"Jour 10",date:"Lun. 4 août",title:"Sunset Hills",
-   rating:3.8,transport:"Scooter",travel:"15 min",driver:null,cost:"≈ 9 €/pers",
-   pf:"Le panorama",desc:"La vue iconique du volcan se reflétant dans la mer au coucher du soleil. On vient pour le décor."},
+  {stage:"gili",img:IMG.gili,bg:BG.blue,num:"Jour 06",date:"Sam. 1ᵉʳ août",title:"Cap sur Gili Trawangan",
+   rating:null,transport:"Voiture + fast boat",travel:"≈ 3 h + 1 h 30",driver:"≈ 40 € (route)",cost:"Bateau ≈ 30 €/pers",
+   pf:"Cap sur les îles",desc:"Route vers le port de Padang Bai, puis fast boat vers Gili Trawangan — l'île festive sans voitures, au large de Lombok."},
+  {stage:"gili",img:IMG.turtle,bg:BG.blue,num:"Jour 07",date:"Dim. 2 août",title:"Tour snorkeling des 3 îles",
+   rating:4.8,transport:"Bateau",travel:"Journée",driver:null,cost:"≈ 15 €/pers",
+   pf:"Tortues & coraux",desc:"Tour des trois Gili en bateau à fond de verre : nage avec les tortues, jardins de coraux et eaux cristallines."},
+  {stage:"gili",img:IMG.gili,bg:BG.blue,num:"Jour 08",date:"Lun. 3 août",title:"Plongée & soirée festive",
+   rating:4.5,transport:"À pied / vélo",travel:"Sur place",driver:null,cost:"Plongée ≈ 40 € · bars",
+   pf:"Ambiance festive",desc:"Plongée ou farniente la journée, puis l'ambiance qui a fait la réputation de l'île : bars de plage et concerts live (Sama-Sama)."},
+  {stage:"gili",img:IMG.sunset,bg:BG.warm,num:"Jour 09",date:"Mar. 4 août",title:"Détente & sunset",
+   rating:4.4,transport:"Vélo",travel:"Sur place",driver:null,cost:"≈ 10 €/pers",
+   pf:"Sunset bars",desc:"Vélo autour de l'île, plages désertes côté ouest et coucher de soleil face aux volcans de Bali et de Lombok."},
 
-  {stage:"sidemen",img:IMG.batur,bg:BG.dark,num:"Jour 11",date:"Mar. 5 août",title:"Ascension du Batur",
+  {stage:"sidemen",img:IMG.sidem,bg:BG.green,num:"Jour 10",date:"Mer. 5 août",title:"Retour à Bali & Sidemen",
+   rating:null,transport:"Fast boat + voiture",travel:"≈ 1 h 30 + 1 h",driver:"Bateau ≈ 30 €/pers + 22 €",cost:"—",
+   pf:"Retour sur l'île",desc:"Fast boat retour vers Padang Bai, puis courte route jusqu'à la vallée verdoyante et paisible de Sidemen."},
+  {stage:"sidemen",img:IMG.batur,bg:BG.dark,num:"Jour 11",date:"Jeu. 6 août",title:"Ascension du Batur",
    rating:4.8,transport:"Navette",travel:"1 h 15",driver:"≈ 30 €",cost:"≈ 35 €/pers",
    pf:"L'apothéose",desc:"Lever de soleil inoubliable depuis le sommet du volcan, au-dessus de la mer de nuages. Départ nocturne."},
-  {stage:"sidemen",img:IMG.food,bg:BG.green,num:"Jour 12",date:"Mer. 6 août",title:"Cours de cuisine",
+  {stage:"sidemen",img:IMG.food,bg:BG.green,num:"Jour 12",date:"Ven. 7 août",title:"Cours de cuisine",
    rating:4.8,transport:"À pied",travel:"Sur place",driver:null,cost:"≈ 22 €/pers",
    pf:"Immersion",desc:"Les secrets de la cuisine balinaise transmis par une famille locale : marché, épices et plats traditionnels."},
-  {stage:"sidemen",img:IMG.sidem,bg:BG.green,num:"Jour 13",date:"Jeu. 7 août",title:"Trek de Sidemen",
+  {stage:"sidemen",img:IMG.sidem,bg:BG.green,num:"Jour 13",date:"Sam. 8 août",title:"Trek de Sidemen",
    rating:null,transport:"À pied",travel:"3 h",driver:null,cost:"≈ 10 €/pers",
    pf:"Authenticité",desc:"Le « vrai » Bali à pied, entre rizières en terrasses, rivières et vie de village, sous le Mont Agung."},
-  {stage:"sidemen",img:IMG.besakih,bg:BG.green,num:"Jour 14",date:"Ven. 8 août",title:"Temple de Besakih",
+  {stage:"sidemen",img:IMG.besakih,bg:BG.green,num:"Jour 14",date:"Dim. 9 août",title:"Temple de Besakih",
    rating:4.5,transport:"Chauffeur",travel:"40 min",driver:"≈ 22 €",cost:"≈ 13 €/pers",
    pf:"Spiritualité",desc:"Le « Temple Mère » : le plus grand et le plus saint complexe de Bali, étagé sur les pentes du volcan."},
-  {stage:"sidemen",img:IMG.kehen,bg:BG.green,num:"Jour 15",date:"Dim. 10 août",title:"Temple Kehen",
+  {stage:"sidemen",img:IMG.kehen,bg:BG.green,num:"Jour 15",date:"Lun. 10 août",title:"Temple Kehen",
    rating:4.6,transport:"Chauffeur",travel:"45 min",driver:"≈ 22 €",cost:"≈ 3 €/pers",
    pf:"Architecture",desc:"Un bijou historique du IXᵉ siècle, en terrasses sous un banian millénaire, préservé du tourisme de masse."},
 
   {type:"info",img:IMG.sidem,bg:BG.green,num:"Infos pratiques",title:"Budget & conseils",
    cards:[
-     {h:"Transferts chauffeur · ≈ 250 €/véhicule",p:"DPS→Munduk 35 € · Belimbing 25 € · Banjar 22 € · Munduk→Amed 40 € · Tirta Gangga 22 € · Batur 30 € · Besakih 22 € · Kehen 22 € · Sidemen→DPS 32 €. Par voiture, carburant inclus."},
-     {h:"Activités · ≈ 150 €/pers",p:"Entrées de sites, pirogues, snorkeling, trek du Batur et cours de cuisine. Temples et rizières : 2 à 13 €."},
-     {h:"Tenue & temples",p:"Sarong obligatoire pour tous les temples (location sur place). Chaussures de marche et coupe-vent pour le Batur."},
-     {h:"Philosophie du voyage",p:"Seulement 3 points de chute pour limiter les trajets : authenticité, randonnée et immersion locale."}
+     {h:"Transferts chauffeur · ≈ 250 €/véhicule",p:"DPS→Munduk 35 € · Jatiluwih 25 € · Banjar 22 € · Munduk→Padang Bai 40 € · Padang Bai→Sidemen 22 € · Batur 30 € · Besakih 22 € · Kehen 22 € · Sidemen→DPS 32 €. Par voiture, carburant inclus."},
+     {h:"Bateau Gili · ≈ 60 €/pers (A/R)",p:"Fast boat Padang Bai ⇄ Gili Trawangan, ~1h30 par trajet. À réserver 1 à 2 mois à l'avance (haute saison). Île sans voitures : vélo, marche ou cidomo."},
+     {h:"Activités · ≈ 150 €/pers",p:"Entrées, pirogues, snorkeling, plongée, trek du Batur et cours de cuisine. Temples et rizières : 3 à 13 €."},
+     {h:"Esprit du séjour",p:"Nature et authenticité à Munduk et Sidemen, et une parenthèse festive aux fonds marins superbes à Gili Trawangan."}
    ]},
-  {type:"map",title:"Selamat jalan",sub:"17 jours · 3 étapes · 15 expériences"},
+  {type:"map",title:"Selamat jalan",sub:"15 jours · 3 étapes · des montagnes aux îles"},
 ];
 
 /* ---- cartes : version large (bureau) + version haute (mobile) ---- */
@@ -290,10 +292,10 @@ function mapWide(){
   const pins=[
     {x:568,y:462,l:"Aéroport DPS",sm:true,s:21},
     {x:496,y:148,l:"Munduk",s:21},
-    {x:933,y:200,l:"Amed",s:21},
+    {x:900,y:135,l:"Gili Trawangan",s:21},
     {x:778,y:277,l:"Sidemen",s:21},
   ];
-  const route="M568,462 C500,360 470,250 496,148 C560,150 800,150 933,200 C860,235 820,260 778,277 C700,330 600,400 568,462";
+  const route="M568,462 C500,360 470,250 496,148 C620,120 800,110 900,135 C880,200 820,250 778,277 C700,340 600,410 568,462";
   const coast="M70,178 Q210,150 360,142 Q520,135 680,142 Q840,150 930,162 Q990,185 980,212 Q960,245 880,272 Q800,300 700,330 Q640,348 600,355 L590,360 Q610,400 600,452 Q560,490 500,470 Q470,440 500,402 Q540,372 560,360 Q470,360 380,352 Q280,338 200,300 Q120,255 70,178 Z";
   const p=pins.map(pn=>`<g class="pin">
       <circle class="h" cx="${pn.x}" cy="${pn.y}" r="22"/><circle class="c" cx="${pn.x}" cy="${pn.y}" r="8"/>
@@ -304,10 +306,10 @@ function mapTall(){
   const pins=[
     {x:300,y:300,l:"Aéroport",sm:true,s:26},
     {x:250,y:96,l:"Munduk",s:26},
-    {x:520,y:130,l:"Amed",s:26},
+    {x:560,y:110,l:"Gili Trawangan",s:26},
     {x:430,y:180,l:"Sidemen",s:26},
   ];
-  const route="M300,300 C250,230 230,160 250,96 C320,98 460,100 520,130 C480,150 455,165 430,180 C380,225 330,265 300,300";
+  const route="M300,300 C250,230 230,160 250,96 C360,88 490,90 560,110 C530,150 460,160 430,180 C380,225 330,265 300,300";
   const coast="M40,118 Q140,98 250,92 Q360,88 470,94 Q560,100 600,112 Q625,128 615,148 Q598,172 540,190 Q470,210 410,232 Q380,245 360,250 Q380,290 360,322 Q330,352 290,338 Q270,312 295,288 Q320,270 330,258 Q260,256 200,248 Q120,234 80,200 Q45,165 40,118 Z";
   const p=pins.map(pn=>`<g class="pin">
       <circle class="h" cx="${pn.x}" cy="${pn.y}" r="20"/><circle class="c" cx="${pn.x}" cy="${pn.y}" r="7"/>
